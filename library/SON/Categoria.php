@@ -1,7 +1,7 @@
 <?php
 namespace SON;
 
-class Categoria
+class Categoria implements CategoriaInterface
 {
     private $id;
     private $nome;

@@ -35,14 +35,40 @@
 
 	//$connection =  $di->get('connection');
 	//$produto =  $di->get('produto');
-	$conexao1 = $di->get('conexao1');
+
 	//$produto2 = $di->get('SON\Teste');
 	$di->instanceManager()->addTypePreference('SON\Db\Connection','conexao1'); #Adiciona preferencia
-
-	$david = $di->get('SON\David');
+	$conexao1 = $di->get('conexao1');
+	//$david = $di->get('SON\David');
 	//echo $produto === $produto2; //Objetos difrentes, interessante
-	$categoria = $di->get('SON\Categoria',array('db' => 'conexao1'));
-	print_r($categoria);die;
+	//$categoria = $di->get('SON\Categoria',array('db' => 'conexao1'));
+	#print_r($categoria);die;
+
+	$produto = $di->get('SON\Produto',array('db' => $conexao1));
+	#print_r($produto);
+
+	//$di = new Zend\Di\Di;
+	$di->configure(new Zend\Di\Config(array(
+		'definition' => array(
+			'class' => array(
+				'SON\Produto' => array(
+					'addCategoria' => array(
+					'categoria' => array('type'=>'SON\CategoriaInterface','required' => true),
+				)
+			)
+			)
+		),
+		'instance' => array(
+			'SON\Produto' => array(
+				'injection' => array(
+					'SON\Categoria',
+					'SON\Category',
+				)
+			)
+		)
+	)));
+	$produto = $di->get('SON\Produto');
+	print_r($produto);
 	//@Zend\Di\Display\Console::export($di);
 	//$conexao = new SON\Db\Connection("localhost","zend_intermediario","root","root");
 	//$categoria = new \SON\Categoria($conexao);

@@ -15,7 +15,7 @@ class Connection
         $this->user     = $user;
         $this->password = $password;
 
-        return new \PDO("mysql:host={$this->server};dbname={$this->dbName}",$this->user,$this->password);
+        //return new \PDO("mysql:host={$this->server};dbname={$this->dbName}",$this->user,$this->password);
     }
 
 }
